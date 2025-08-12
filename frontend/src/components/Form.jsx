@@ -4,7 +4,7 @@ import api from "../api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 
 export default function Form({ route, method }) {
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -14,9 +14,8 @@ export default function Form({ route, method }) {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-
     try {
-      const res = await api.post(route, { userName, password });
+      const res = await api.post(route, { username, password });
       if (method === "login") {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
@@ -34,14 +33,13 @@ export default function Form({ route, method }) {
   return (
     <div className="flex min-h-full flex-col justify-center items-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
+        <h2 className="mt-10 text-center text-3xl font-bold tracking-tight text-gray-900">
           {name} to your account
         </h2>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Username */}
           <div>
             <label
               htmlFor="username"
@@ -51,19 +49,14 @@ export default function Form({ route, method }) {
             </label>
             <div className="mt-2">
               <input
-                id="username"
-                name="username"
                 type="text"
                 placeholder="Enter your username"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className="block w-full rounded-md border border-gray-300 px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
           </div>
-
-          {/* Password */}
           <div>
             <div className="flex items-center justify-between">
               <label
@@ -75,13 +68,10 @@ export default function Form({ route, method }) {
             </div>
             <div className="mt-2">
               <input
-                id="password"
-                name="password"
                 type="password"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
                 className="block w-full rounded-md border border-gray-300 px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
