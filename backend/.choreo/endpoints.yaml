@@ -1,18 +1,11 @@
-# +required Version of the endpoint configuration YAML
-version: 0.1
-
-# +required List of endpoints to create
+schemaVersion: "1.2"
 endpoints:
-  # +required Unique name for the endpoint. (This name will be used when generating the managed API)
-  - name: "REST API"
-    # +required Numeric port value that gets exposed via this endpoint
-    port: 8080
-    # +required Type of the traffic this endpoint is accepting. Example: REST, GraphQL, etc.
-    # Allowed values: REST, GraphQL, GRPC
-    type: REST
-    # +optional Network level visibility of this endpoint. Defaults to Project
-    # Accepted values: Project|Organization|Public.
-    networkVisibility: Public
-    # +optional Context (base path) of the API that is exposed via this endpoint.
-    # This is mandatory if the endpoint type is set to REST or GraphQL.
-    context: /
+    - name: rest-api-5c6
+      displayName: REST API
+      service:
+        basePath: /
+        port: 8080
+      type: REST
+      networkVisibilities:
+        - Project
+        - Public
