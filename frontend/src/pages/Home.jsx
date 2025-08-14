@@ -57,61 +57,64 @@ export default function Home() {
   }, []);
 
   return (
-  <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 lg:px-8 gap-10">
-    <div className="w-full max-w-lg">
-      <h2 className="text-3xl font-semibold text-gray-950 mb-4 text-center">Notes</h2>
-      <div className="space-y-4">
-        {notes.length > 0 ? (
-          notes.map((note) => (
-            <Note note={note} onDelete={deleteNote} key={note.id} />
-          ))
-        ) : (
-          <p className="text-center text-neutral-500">No notes to display</p>
-        )}
-      </div>
-    </div>
-
-    <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle>Create a Note</CardTitle>
-        <CardDescription>
-          Fill in the details below to create a new note.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={createNote} className="space-y-6">
-          <div>
-            <Label htmlFor="title">Title</Label>
-            <Input
-              type="text"
-              name="title"
-              required
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <Label htmlFor="content">Content</Label>
-            <Textarea
-              name="content"
-              required
-              rows={4}
-              placeholder="Type your content here."
-              onChange={(e) => setContent(e.target.value)}
-            />
-          </div>
-
-          <Button type="submit" className="w-full">
-            Create
-          </Button>
-        </form>
-      </CardContent>
-      <CardFooter>
-        <p className="text-sm text-gray-500">
-          You can create, view, and delete notes here.
-        </p>
-      </CardFooter>
-    </Card>
+  <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-6 py-12 lg:px-8 gap-20">
+  {/* Notes List - Left */}
+  <div className="w-full lg:w-1/2 space-y-4">
+    <h2 className="text-3xl font-semibold text-gray-950 mb-4 text-center lg:text-left">
+      Notes
+    </h2>
+    {notes.length > 0 ? (
+      notes.map((note) => (
+        <Note note={note} onDelete={deleteNote} key={note.id} />
+      ))
+    ) : (
+      <p className="text-center lg:text-left text-neutral-500">No notes to display</p>
+    )}
   </div>
+
+  {/* Create Note Form - Right */}
+  <Card className="w-full lg:w-1/3">
+    <CardHeader>
+      <CardTitle>Create a Note</CardTitle>
+      <CardDescription>
+        Fill in the details below to create a new note.
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <form onSubmit={createNote} className="space-y-6">
+        <div>
+          <Label htmlFor="title">Title</Label>
+          <Input
+            type="text"
+            name="title"
+            required
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="content">Content</Label>
+          <Textarea
+            name="content"
+            required
+            rows={4}
+            placeholder="Type your content here."
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </div>
+
+        <Button type="submit" className="w-full">
+          Create
+        </Button>
+      </form>
+    </CardContent>
+    <CardFooter>
+      <p className="text-sm text-gray-500">
+        You can create, view, and delete notes here.
+      </p>
+    </CardFooter>
+  </Card>
+</div>
+
 );
 }
