@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
 import { Search } from "lucide-react";
-import React from "react";
+import * as React from "react";
 
 export function PlaceholdersAndVanishInput({
   placeholders,
@@ -17,7 +17,7 @@ export function PlaceholdersAndVanishInput({
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
 
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const startAnimation = () => {
     intervalRef.current = setInterval(() => {
       setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);

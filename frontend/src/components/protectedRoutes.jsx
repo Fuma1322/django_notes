@@ -3,6 +3,7 @@ import {jwtDecode} from 'jwt-decode'
 import api from '../api'
 import { REFRESH_TOKEN, ACCESS_TOKEN } from '../constants'
 import {useState, useEffect} from 'react'
+import { Loadero } from './Loader'
 
 
 function ProtectedRoute({children}) {
@@ -50,7 +51,9 @@ function ProtectedRoute({children}) {
     }
 
     if (isAuthorised === null) {
-        return <div>Loading...</div>
+        return <div className='flex items-center justify-center min-h-screen'>
+            <Loadero />
+        </div>
     }
 
     return isAuthorised ? children : <Navigate to="/login" />
